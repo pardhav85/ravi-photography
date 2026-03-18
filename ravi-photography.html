@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Ravi Photography — Vijayawada</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:       #F7F3EE;
+  --bg2:      #EDE8E0;
+  --bg3:      #E4DDD3;
+  --card:     #FDFAF6;
+  --sage:     #7A9E8E;
+  --sage-dk:  #5C8070;
+  --sage-lt:  #A8C5B8;
+  --sage-pale:rgba(122,158,142,0.12);
+  --sage-line:rgba(122,158,142,0.30);
+  --terr:     #C4795A;
+  --terr-lt:  #D9967B;
+  --text:     #2C2418;
+  --muted:    #7A6E64;
+  --soft:     #B0A496;
+  --white:    #FFFCF8;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-weight:300;overflow-x:hidden}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1.1rem 4rem;
+  background:rgba(247,243,238,0.92);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--sage-line);
+  transition:box-shadow .3s;
+}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:600;color:var(--text);text-decoration:none;letter-spacing:.03em}
+.nav-logo span{color:var(--sage-dk);font-style:italic}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .3s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--sage);transform:scaleX(0);transition:transform .3s}
+.nav-links a:hover{color:var(--sage-dk)}
+.nav-links a:hover::after{transform:scaleX(1)}
+
+/* HERO */
+#hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
+  padding:8rem 4rem 6rem 8rem;
+  position:relative;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 80% at 88% 45%, rgba(122,158,142,.18) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 40% at 5%  85%, rgba(196,121,90,.08) 0%, transparent 55%);
+}
+.hero-shape{
+  position:absolute;right:6rem;top:50%;transform:translateY(-50%);
+  width:320px;height:420px;
+  border:1.5px solid var(--sage-line);
+  border-radius:160px 160px 160px 160px;
+  pointer-events:none;
+}
+.hero-shape::before{
+  content:'';position:absolute;inset:22px;
+  border:1px solid rgba(122,158,142,.18);
+  border-radius:140px 140px 140px 140px;
+}
+.hero-inner{position:relative;z-index:1;max-width:620px}
+.eyebrow{display:flex;align-items:center;gap:.75rem;margin-bottom:2rem}
+.eyebrow-line{width:38px;height:1px;background:var(--sage)}
+.eyebrow-text{font-size:.68rem;letter-spacing:.25em;text-transform:uppercase;color:var(--sage-dk)}
+.hero-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(3rem,6.2vw,5.6rem);
+  font-weight:400;line-height:1.08;color:var(--text);
+  margin-bottom:1.5rem;
+}
+.hero-title em{color:var(--sage-dk);font-style:italic}
+.hero-sub{font-size:.95rem;color:var(--muted);line-height:1.95;max-width:440px;margin-bottom:3rem}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-sage{
+  display:inline-block;padding:.9rem 2.4rem;
+  background:var(--sage-dk);color:var(--white);
+  font-family:'Outfit',sans-serif;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
+  text-decoration:none;font-weight:500;border:none;cursor:pointer;
+  transition:background .3s,transform .2s;
+}
+.btn-sage:hover{background:var(--sage);transform:translateY(-2px)}
+.btn-outline{
+  display:inline-block;padding:.9rem 2.4rem;
+  border:1.5px solid var(--sage-line);color:var(--sage-dk);
+  font-family:'Outfit',sans-serif;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
+  text-decoration:none;background:transparent;cursor:pointer;
+  transition:all .3s;
+}
+.btn-outline:hover{background:var(--sage-pale);border-color:var(--sage);transform:translateY(-2px)}
+.hero-stats{
+  position:absolute;bottom:3.5rem;right:8rem;
+  display:flex;gap:3.5rem;z-index:1;
+}
+.stat-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:600;color:var(--sage-dk);display:block}
+.stat-label{font-size:.63rem;letter-spacing:.18em;text-transform:uppercase;color:var(--soft);margin-top:.2rem}
+.hero-scroll{
+  position:absolute;bottom:3rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:.5rem;z-index:1;
+}
+.scroll-text{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--soft)}
+.scroll-line{width:1px;height:48px;background:linear-gradient(to bottom,var(--sage),transparent);animation:sd 2s ease-in-out infinite}
+@keyframes sd{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* DIVIDER */
+.divider{height:1px;background:linear-gradient(to right,transparent,var(--sage-line),transparent)}
+
+/* SECTION COMMON */
+.sec-eyebrow{display:flex;align-items:center;gap:.75rem;margin-bottom:1.2rem}
+.sec-eyebrow-line{width:30px;height:1px;background:var(--sage)}
+.sec-eyebrow-text{font-size:.63rem;letter-spacing:.22em;text-transform:uppercase;color:var(--sage-dk)}
+.sec-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2rem,3.5vw,2.9rem);
+  font-weight:400;line-height:1.2;color:var(--text);margin-bottom:1.2rem;
+}
+.sec-title em{color:var(--sage-dk);font-style:italic}
+
+/* ABOUT */
+#about{
+  background:var(--card);
+  display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;
+  padding:7rem 8rem;
+}
+.about-vis{position:relative;height:500px}
+.av-block{
+  position:absolute;
+  background:var(--bg2);
+  border:1px solid var(--sage-line);
+  display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.6rem;
+}
+.av-b1{top:0;left:0;width:57%;height:71%}
+.av-b2{bottom:0;right:0;width:49%;height:51%}
+.av-icon{width:36px;height:36px;opacity:.35}
+.av-lbl{font-size:.66rem;letter-spacing:.15em;text-transform:uppercase;color:var(--soft)}
+.av-badge{
+  position:absolute;top:55%;left:41%;transform:translate(-50%,-50%);
+  background:var(--sage-dk);color:var(--white);
+  padding:1.2rem 1.6rem;text-align:center;z-index:2;
+}
+.av-badge-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:600;display:block}
+.av-badge-lbl{font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;font-weight:500}
+.about-txt{font-size:.92rem;color:var(--muted);line-height:2;margin-bottom:.9rem}
+.pillars{display:flex;gap:2.5rem;margin:2rem 0 2.5rem}
+.pillar-val{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--sage);font-weight:600}
+.pillar-lbl{font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);margin-top:.2rem}
+
+/* SERVICES */
+#services{background:var(--bg);padding:7rem 4rem}
+.svc-head{text-align:center;margin-bottom:4rem}
+.svc-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:1.2rem;max-width:1100px;margin:0 auto;
+}
+.svc-card{
+  background:var(--card);
+  border:1px solid var(--bg3);
+  padding:2.4rem 2rem;
+  position:relative;overflow:hidden;
+  transition:border-color .3s,transform .3s;
+  cursor:default;
+}
+.svc-card::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:3px;
+  background:var(--sage);transform:scaleX(0);transform-origin:left;transition:transform .4s;
+}
+.svc-card:hover{border-color:var(--sage-line);transform:translateY(-4px)}
+.svc-card:hover::after{transform:scaleX(1)}
+.svc-num{font-family:'Playfair Display',serif;font-size:2.4rem;font-weight:600;color:var(--bg3);line-height:1;margin-bottom:1.1rem}
+.svc-title{font-family:'Playfair Display',serif;font-size:1.12rem;font-weight:600;color:var(--text);margin-bottom:.65rem}
+.svc-desc{font-size:.83rem;color:var(--muted);line-height:1.85}
+
+/* WORKS */
+#works{background:var(--bg2);padding:7rem 4rem}
+.works-head{text-align:center;margin-bottom:1.5rem}
+.works-filter{display:flex;justify-content:center;gap:.6rem;flex-wrap:wrap;margin-bottom:3rem}
+.filter-btn{
+  padding:.45rem 1.4rem;
+  border:1.5px solid var(--bg3);
+  background:transparent;
+  font-family:'Outfit',sans-serif;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);cursor:pointer;transition:all .25s;
+}
+.filter-btn:hover,.filter-btn.active{background:var(--sage-dk);color:var(--white);border-color:var(--sage-dk)}
+.works-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:6px;max-width:1100px;margin:0 auto;
+}
+.work-item{position:relative;cursor:pointer;overflow:hidden;transition:transform .3s}
+.work-item:nth-child(1){grid-row:span 2}
+.work-item:nth-child(4){grid-column:span 2}
+.work-item:hover{transform:scale(1.018)}
+.work-ph{
+  width:100%;height:100%;min-height:215px;
+  display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.5rem;
+  font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;
+}
+.work-overlay{
+  position:absolute;inset:0;
+  background:rgba(44,36,24,0);
+  display:flex;align-items:flex-end;padding:1.5rem;
+  transition:background .3s;
+}
+.work-item:hover .work-overlay{background:rgba(44,36,24,.5)}
+.work-info{opacity:0;transform:translateY(8px);transition:all .3s}
+.work-item:hover .work-info{opacity:1;transform:translateY(0)}
+.work-info h4{font-family:'Playfair Display',serif;font-size:1rem;font-weight:600;color:#fff}
+.work-info p{font-size:.7rem;color:var(--sage-lt);letter-spacing:.07em;margin-top:3px}
+
+/* PROCESS */
+#process{background:var(--bg);padding:7rem 4rem}
+.proc-head{text-align:center;margin-bottom:5rem}
+.proc-row{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  max-width:1000px;margin:0 auto;
+  position:relative;
+}
+.proc-row::before{
+  content:'';position:absolute;top:30px;left:12.5%;right:12.5%;
+  height:1px;background:var(--sage-line);
+}
+.proc-step{text-align:center;padding:0 1.5rem;position:relative}
+.step-dot{
+  width:60px;height:60px;border-radius:50%;
+  border:1.5px solid var(--sage-line);
+  background:var(--card);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 1.5rem;
+  font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:600;color:var(--sage-dk);
+  position:relative;z-index:1;transition:all .3s;
+}
+.proc-step:hover .step-dot{background:var(--sage-dk);color:var(--white);border-color:var(--sage-dk)}
+.step-ttl{font-family:'Playfair Display',serif;font-size:1rem;font-weight:600;color:var(--text);margin-bottom:.5rem}
+.step-dsc{font-size:.78rem;color:var(--muted);line-height:1.78}
+
+/* CONTACT */
+#contact{background:var(--bg2);padding:7rem 8rem}
+.contact-wrap{display:grid;grid-template-columns:1.1fr 1fr;gap:7rem;align-items:start}
+.contact-desc{font-size:.9rem;color:var(--muted);line-height:2;margin-bottom:2rem;max-width:420px}
+.avail-row{display:flex;align-items:center;gap:.6rem;font-size:.75rem;color:var(--sage-dk);margin-bottom:2.5rem}
+.avail-dot{width:8px;height:8px;border-radius:50%;background:var(--sage);flex-shrink:0;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.ccards{display:flex;flex-direction:column;gap:.9rem}
+.ccard{
+  display:flex;align-items:center;gap:1.2rem;
+  padding:1.2rem 1.4rem;
+  background:var(--card);
+  border:1px solid var(--bg3);
+  transition:border-color .3s;
+}
+.ccard:hover{border-color:var(--sage)}
+.ccard-icon{
+  width:44px;height:44px;flex-shrink:0;
+  background:var(--sage-pale);
+  display:flex;align-items:center;justify-content:center;
+}
+.ccard-icon svg{width:18px;height:18px;stroke:var(--sage-dk);fill:none;stroke-width:1.5}
+.ccard-lbl{font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--soft)}
+.ccard-val{font-size:.88rem;color:var(--text);margin-top:.15rem;font-weight:400}
+.cta-box{
+  padding:3rem;background:var(--card);
+  border:1px solid var(--sage-line);
+}
+.cta-title{font-family:'Playfair Display',serif;font-size:1.65rem;font-weight:400;color:var(--text);line-height:1.4;margin-bottom:1.1rem}
+.cta-title em{color:var(--sage-dk);font-style:italic}
+.cta-desc{font-size:.82rem;color:var(--muted);line-height:1.95;margin-bottom:2rem}
+.cta-btns{display:flex;flex-direction:column;gap:.8rem}
+.cta-note{font-size:.68rem;color:var(--soft);margin-top:1.4rem;text-align:center;letter-spacing:.06em}
+
+/* FOOTER */
+footer{
+  background:var(--text);
+  padding:2.5rem 4rem;
+  display:flex;justify-content:space-between;align-items:center;
+  border-top:3px solid var(--sage);
+}
+.footer-logo{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:600;color:var(--bg2)}
+.footer-logo span{color:var(--sage-lt);font-style:italic}
+.footer-copy{font-size:.7rem;color:var(--soft);letter-spacing:.05em}
+.footer-social{display:flex;gap:.75rem}
+.soc{
+  width:38px;height:38px;
+  border:1px solid rgba(168,197,184,.25);
+  display:flex;align-items:center;justify-content:center;
+  text-decoration:none;transition:all .3s;
+}
+.soc:hover{background:var(--sage-dk);border-color:var(--sage-dk)}
+.soc svg{width:16px;height:16px;stroke:var(--sage-lt);fill:none;stroke-width:1.5}
+.soc:hover svg{stroke:var(--white)}
+
+/* ANIMATIONS */
+.fade-up{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+
+/* RESPONSIVE */
+@media(max-width:960px){
+  nav{padding:1rem 1.5rem}
+  .nav-links{gap:1.5rem}
+  #hero{padding:7rem 2rem 5rem}
+  .hero-stats{display:none}
+  .hero-shape{display:none}
+  #about{grid-template-columns:1fr;padding:5rem 2rem;gap:3rem}
+  .about-vis{height:300px}
+  #contact{padding:5rem 2rem}
+  .contact-wrap{grid-template-columns:1fr;gap:3rem}
+  .works-grid{grid-template-columns:1fr 1fr}
+  .work-item:nth-child(1){grid-row:span 1}
+  .work-item:nth-child(4){grid-column:span 1}
+  .proc-row{grid-template-columns:1fr 1fr;gap:3rem}
+  .proc-row::before{display:none}
+  footer{flex-direction:column;gap:1rem;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#hero" class="nav-logo">Ravi <span>Photography</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#works">Portfolio</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-shape"></div>
+  <div class="hero-inner">
+    <div class="eyebrow">
+      <div class="eyebrow-line"></div>
+      <span class="eyebrow-text">Vijayawada · Wedding &amp; Event Photography</span>
+    </div>
+    <h1 class="hero-title">
+      Every Frame,<br>A <em>Timeless</em><br>Memory
+    </h1>
+    <p class="hero-sub">Professional wedding photography, videography, aerial drone coverage, and complete visual storytelling — crafted with heart and precision for your most cherished celebrations.</p>
+    <div class="hero-btns">
+      <a href="#works" class="btn-sage">View Portfolio</a>
+      <a href="#contact" class="btn-outline">Book a Session</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div>
+      <span class="stat-num">500+</span>
+      <div class="stat-label">Weddings Captured</div>
+    </div>
+    <div>
+      <span class="stat-num">8+</span>
+      <div class="stat-label">Years Experience</div>
+    </div>
+    <div>
+      <span class="stat-num">100%</span>
+      <div class="stat-label">Client Satisfaction</div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span class="scroll-text">Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-vis fade-up">
+    <div class="av-block av-b1">
+      <svg class="av-icon" viewBox="0 0 48 48" fill="none" stroke="#7A9E8E" stroke-width="1.3">
+        <rect x="4" y="10" width="40" height="28" rx="2"/><circle cx="24" cy="24" r="7"/><circle cx="24" cy="24" r="3"/><rect x="18" y="6" width="12" height="6" rx="1.5"/>
+      </svg>
+      <span class="av-lbl">Photography</span>
+    </div>
+    <div class="av-block av-b2">
+      <svg class="av-icon" viewBox="0 0 48 48" fill="none" stroke="#7A9E8E" stroke-width="1.3">
+        <polygon points="38,24 16,10 16,38"/><circle cx="10" cy="24" r="4"/>
+      </svg>
+      <span class="av-lbl">Videography</span>
+    </div>
+    <div class="av-badge">
+      <span class="av-badge-num">500+</span>
+      <span class="av-badge-lbl">Happy Couples</span>
+    </div>
+  </div>
+  <div class="fade-up">
+    <div class="sec-eyebrow">
+      <div class="sec-eyebrow-line"></div>
+      <span class="sec-eyebrow-text">About Ravi Photography</span>
+    </div>
+    <h2 class="sec-title">Visual Storytelling with <em>Heart</em></h2>
+    <p class="about-txt">Ravi Photography is a premier full-service photography and videography studio based in Vijayawada. We specialise in transforming your most cherished celebrations into breathtaking, lasting visual narratives.</p>
+    <p class="about-txt">From intimate wedding preparations to grand aerial drone coverage — our team brings deep technical expertise and artistic sensitivity to every single frame we capture.</p>
+    <div class="pillars">
+      <div>
+        <div class="pillar-val">8+ Yrs</div>
+        <div class="pillar-lbl">Experience</div>
+      </div>
+      <div>
+        <div class="pillar-val">500+</div>
+        <div class="pillar-lbl">Events Covered</div>
+      </div>
+      <div>
+        <div class="pillar-val">4K</div>
+        <div class="pillar-lbl">Video Quality</div>
+      </div>
+    </div>
+    <a href="#contact" class="btn-sage">Start Your Journey</a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="svc-head fade-up">
+    <div class="sec-eyebrow" style="justify-content:center">
+      <div class="sec-eyebrow-line"></div>
+      <span class="sec-eyebrow-text">What We Offer</span>
+      <div class="sec-eyebrow-line"></div>
+    </div>
+    <h2 class="sec-title">Our <em>Services</em></h2>
+  </div>
+  <div class="svc-grid">
+    <div class="svc-card fade-up">
+      <div class="svc-num">01</div>
+      <h3 class="svc-title">Wedding Photography</h3>
+      <p class="svc-desc">Complete wedding day coverage from pre-bridal preparations to the final farewell. Every emotion documented with artistic precision and genuine warmth.</p>
+    </div>
+    <div class="svc-card fade-up">
+      <div class="svc-num">02</div>
+      <h3 class="svc-title">Candid Photography</h3>
+      <p class="svc-desc">Unscripted, natural moments revealing genuine emotions. Real laughter, quiet glances, and heartfelt tears — beautifully preserved without interruption.</p>
+    </div>
+    <div class="svc-card fade-up">
+      <div class="svc-num">03</div>
+      <h3 class="svc-title">Wedding Videography</h3>
+      <p class="svc-desc">Cinematic wedding films with professional colour grading, sound design, and narrative structure — a keepsake you will return to for a lifetime.</p>
+    </div>
+    <div class="svc-card fade-up">
+      <div class="svc-num">04</div>
+      <h3 class="svc-title">Drone Aerial Coverage</h3>
+      <p class="svc-desc">Breathtaking bird's-eye perspectives of your venue and celebrations. Licensed drone operations delivering sweeping 4K aerial footage with precision.</p>
+    </div>
+    <div class="svc-card fade-up">
+      <div class="svc-num">05</div>
+      <h3 class="svc-title">Outdoor &amp; Pre-Wedding Shoots</h3>
+      <p class="svc-desc">Romantic portrait sessions at scenic locations across Vijayawada and Andhra Pradesh — curated to perfectly reflect your unique love story.</p>
+    </div>
+    <div class="svc-card fade-up">
+      <div class="svc-num">06</div>
+      <h3 class="svc-title">Album Design &amp; Video Editing</h3>
+      <p class="svc-desc">Luxury custom album layouts and professional post-production — colour correction, highlight reels, and cinematic edits that elevate every image.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PORTFOLIO -->
+<section id="works">
+  <div class="works-head fade-up">
+    <div class="sec-eyebrow" style="justify-content:center">
+      <div class="sec-eyebrow-line"></div>
+      <span class="sec-eyebrow-text">Portfolio</span>
+      <div class="sec-eyebrow-line"></div>
+    </div>
+    <h2 class="sec-title">Selected <em>Works</em></h2>
+  </div>
+  <div class="works-filter fade-up">
+    <button class="filter-btn active" onclick="filterWorks('all',this)">All</button>
+    <button class="filter-btn" onclick="filterWorks('wedding',this)">Wedding</button>
+    <button class="filter-btn" onclick="filterWorks('candid',this)">Candid</button>
+    <button class="filter-btn" onclick="filterWorks('outdoor',this)">Outdoor</button>
+    <button class="filter-btn" onclick="filterWorks('drone',this)">Drone</button>
+  </div>
+  <div class="works-grid">
+    <div class="work-item" data-cat="wedding" style="background:linear-gradient(150deg,#B5C9BF,#7A9E8E)">
+      <div class="work-ph" style="color:rgba(255,255,255,.55)">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="1.2"><rect x="2" y="3" width="20" height="16" rx="1.5"/><circle cx="12" cy="11" r="4"/><circle cx="12" cy="11" r="1.5"/></svg>
+        Wedding Day
+      </div>
+      <div class="work-overlay"><div class="work-info"><h4>A Day of Vows</h4><p>Wedding Photography</p></div></div>
+    </div>
+    <div class="work-item" data-cat="candid" style="background:linear-gradient(150deg,#D9967B,#C4795A)">
+      <div class="work-ph" style="color:rgba(255,255,255,.55)">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="1.2"><circle cx="12" cy="8" r="4"/><path d="M4 20v-1a8 8 0 0 1 16 0v1"/></svg>
+        Candid
+      </div>
+      <div class="work-overlay"><div class="work-info"><h4>Genuine Joy</h4><p>Candid Photography</p></div></div>
+    </div>
+    <div class="work-item" data-cat="drone" style="background:linear-gradient(150deg,#5C8070,#3D6055)">
+      <div class="work-ph" style="color:rgba(255,255,255,.45)">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="1.2"><circle cx="12" cy="12" r="2.5"/><path d="M5 5l2.5 2.5m9-2.5-2.5 2.5M5 19l2.5-2.5m9 2.5-2.5-2.5"/><circle cx="5" cy="5" r="1.5"/><circle cx="19" cy="5" r="1.5"/><circle cx="5" cy="19" r="1.5"/><circle cx="19" cy="19" r="1.5"/></svg>
+        Aerial Drone
+      </div>
+      <div class="work-overlay"><div class="work-info"><h4>Above the Horizon</h4><p>Drone Coverage</p></div></div>
+    </div>
+    <div class="work-item" data-cat="outdoor" style="background:linear-gradient(150deg,#E4DDD3,#B0A496)">
+      <div class="work-ph" style="color:rgba(92,80,64,.55)">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(92,80,64,.4)" stroke-width="1.2"><path d="M3 17l4-8 4 5 3-3 4 6"/><circle cx="17" cy="7" r="1.5"/></svg>
+        Outdoor
+      </div>
+      <div class="work-overlay"><div class="work-info"><h4>Golden Hour Romance</h4><p>Pre-Wedding Shoot</p></div></div>
+    </div>
+    <div class="work-item" data-cat="wedding" style="background:linear-gradient(150deg,#A8C5B8,#7A9E8E)">
+      <div class="work-ph" style="color:rgba(255,255,255,.55)">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="1.2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l7.78-7.78a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        Ceremony
+      </div>
+      <div class="work-overlay"><div class="work-info"><h4>Sacred Rituals</h4><p>Wedding Photography</p></div></div>
+    </div>
+    <div class="work-item" data-cat="candid" style="background:linear-gradient(150deg,#C4795A,#9B5A3E)">
+      <div class="work-ph" style="color:rgba(255,255,255,.55)">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="1.2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="1.5"/></svg>
+        Film
+      </div>
+      <div class="work-overlay"><div class="work-info"><h4>Cinematic Moments</h4><p>Wedding Videography</p></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="proc-head fade-up">
+    <div class="sec-eyebrow" style="justify-content:center">
+      <div class="sec-eyebrow-line"></div>
+      <span class="sec-eyebrow-text">How We Work</span>
+      <div class="sec-eyebrow-line"></div>
+    </div>
+    <h2 class="sec-title">Our <em>Process</em></h2>
+  </div>
+  <div class="proc-row fade-up">
+    <div class="proc-step">
+      <div class="step-dot">01</div>
+      <h4 class="step-ttl">Consultation</h4>
+      <p class="step-dsc">A warm discussion to understand your vision, event details, preferred style, and expectations.</p>
+    </div>
+    <div class="proc-step">
+      <div class="step-dot">02</div>
+      <h4 class="step-ttl">Planning</h4>
+      <p class="step-dsc">We plan the schedule, scout venues, and prepare a creative brief tailored to your celebration.</p>
+    </div>
+    <div class="proc-step">
+      <div class="step-dot">03</div>
+      <h4 class="step-ttl">Shoot Day</h4>
+      <p class="step-dsc">Professional, unobtrusive coverage of every meaningful moment — from quiet details to grand festivities.</p>
+    </div>
+    <div class="proc-step">
+      <div class="step-dot">04</div>
+      <h4 class="step-ttl">Delivery</h4>
+      <p class="step-dsc">Edited photos, cinematic films, and premium album designs — delivered with care and precision.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-wrap">
+    <div class="fade-up">
+      <div class="sec-eyebrow">
+        <div class="sec-eyebrow-line"></div>
+        <span class="sec-eyebrow-text">Get In Touch</span>
+      </div>
+      <h2 class="sec-title">Let's Create Something <em>Beautiful</em></h2>
+      <p class="contact-desc">Whether you are planning a grand wedding or an intimate outdoor session, we would love to be part of your story. Reach out — we respond within 24 hours.</p>
+      <div class="avail-row">
+        <div class="avail-dot"></div>
+        Currently accepting bookings for 2025 &amp; 2026
+      </div>
+      <div class="ccards">
+        <div class="ccard">
+          <div class="ccard-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.18 6.18l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.03z"/></svg>
+          </div>
+          <div>
+            <div class="ccard-lbl">Phone &amp; WhatsApp</div>
+            <div class="ccard-val">+91 98765 43210</div>
+          </div>
+        </div>
+        <div class="ccard">
+          <div class="ccard-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <div class="ccard-lbl">Email</div>
+            <div class="ccard-val">ravi@raviphotography.com</div>
+          </div>
+        </div>
+        <div class="ccard">
+          <div class="ccard-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="ccard-lbl">Studio Location</div>
+            <div class="ccard-val">Vijayawada, Andhra Pradesh</div>
+          </div>
+        </div>
+        <div class="ccard">
+          <div class="ccard-icon">
+            <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </div>
+          <div>
+            <div class="ccard-lbl">Instagram</div>
+            <div class="ccard-val">@raviphotography_vjw</div>
+          </div>
+        </div>
+        <div class="ccard">
+          <div class="ccard-icon">
+            <svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+          </div>
+          <div>
+            <div class="ccard-lbl">YouTube</div>
+            <div class="ccard-val">Ravi Photography Official</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="fade-up">
+      <div class="cta-box">
+        <div class="sec-eyebrow" style="margin-bottom:1rem">
+          <div class="sec-eyebrow-line"></div>
+          <span class="sec-eyebrow-text">Book a Session</span>
+        </div>
+        <p class="cta-title">Ready to <em>capture</em><br>your story?</p>
+        <p class="cta-desc">WhatsApp is the fastest way to check availability and receive our detailed packages. We are happy to answer any questions before you book.</p>
+        <div class="cta-btns">
+          <a href="https://wa.me/919876543210" class="btn-sage" style="text-align:center;text-decoration:none">WhatsApp Us Now</a>
+          <a href="mailto:ravi@raviphotography.com" class="btn-outline" style="text-align:center;text-decoration:none">Send an Email</a>
+        </div>
+        <p class="cta-note">Available Monday – Saturday &nbsp;·&nbsp; 9 AM – 7 PM IST</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Ravi <span>Photography</span></div>
+  <p class="footer-copy">© 2025 Ravi Photography · Vijayawada · All rights reserved</p>
+  <div class="footer-social">
+    <a href="#" class="soc" title="Instagram">
+      <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+    </a>
+    <a href="#" class="soc" title="Facebook">
+      <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+    </a>
+    <a href="#" class="soc" title="YouTube">
+      <svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+    </a>
+    <a href="#" class="soc" title="WhatsApp">
+      <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+    </a>
+  </div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((e,i) => {
+    if(e.isIntersecting){
+      setTimeout(() => e.target.classList.add('visible'), i*90);
+      obs.unobserve(e.target);
+    }
+  });
+}, {threshold:0.08});
+document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+function filterWorks(cat,btn){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.work-item').forEach(item=>{
+    const show = cat==='all'||item.dataset.cat===cat;
+    item.style.opacity = show?'1':'0.15';
+    item.style.transform = show?'':'scale(0.97)';
+    item.style.pointerEvents = show?'':'none';
+    item.style.transition = 'opacity .35s,transform .35s';
+  });
+}
+
+window.addEventListener('scroll',()=>{
+  document.getElementById('mainNav').style.boxShadow =
+    window.scrollY>40?'0 4px 24px rgba(44,36,24,0.1)':'none';
+});
+</script>
+</body>
+</html>
